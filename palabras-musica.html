@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Karaoke Kan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="card">
+    <h1>Karaoke Kan</h1>
+
+    <div id="palabra" class="palabra">Cargando…</div>
+
+    <button onclick="nuevaPalabra()">Cambiar palabra</button>
+    <button class="back" onclick="location.href='index.html'">Volver</button>
+  </div>
+
+<script>
+  async function nuevaPalabra() {
+    const res = await fetch('/api/random');
+    const data = await res.json();
+    document.getElementById('palabra').textContent = data.palabra;
+  }
+  nuevaPalabra();
+</script>
+
+</body>
+</html>

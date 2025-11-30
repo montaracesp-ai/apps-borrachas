@@ -1,0 +1,79 @@
+/* ===============================
+   ESTILO GLOBAL TOKYO NIGHT / NEON
+   =============================== */
+
+   body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: #0a0f1f;
+    color: #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Contenedor principal */
+  .container,
+  .card {
+    background: #171d2e;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px #0008;
+    border: 2px solid #a259ff;
+  }
+  
+  /* Títulos */
+  h1, h2 {
+    color: #a259ff;
+    text-shadow: 0 0 10px #a259ff;
+  }
+  
+  /* Botones estilo cyberpunk */
+  button {
+    background: transparent;
+    color: #eaeaea;
+    border: 2px solid #ff2dac;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: 0.25s;
+    box-shadow: 0 0 8px #ff2dac55;
+  }
+  
+  button:hover {
+    border-color: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff88;
+    color: #00d4ff;
+    transform: translateY(-2px);
+  }
+  
+  /* Palabra destacada */
+  .palabra {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 30px 0;
+    color: #ff2dac;
+    text-shadow: 0 0 10px #ff2dac;
+  }
+  
+  /* Botón volver */
+  .back {
+    margin-top: 20px;
+    border-color: #a259ff;
+    box-shadow: 0 0 10px #a259ff55;
+  }
+  .back:hover {
+    border-color: #ff2dac;
+    box-shadow: 0 0 10px #ff2dac, 0 0 20px #ff2dac88;
+    color: #ff2dac;
+  }
+  
+  /* Para centrar páginas sin tarjetas */
+  .full-center {
+    text-align: center;
+  }
+  

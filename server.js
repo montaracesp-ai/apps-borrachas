@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const CSV_PATH = path.join(__dirname, 'palabras-musica.csv');
+const CSV_PATH = path.join(__dirname, './CSV/palabras-musica.csv');
 
 app.use(express.json());
 
