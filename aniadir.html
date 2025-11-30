@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Contenido</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Añadir Contenido</h1>
+
+        <div style="margin: 20px 0;">
+            <label for="archivoSelect" style="display: block; margin-bottom: 10px; color: #a259ff;">Selecciona el
+                archivo:</label>
+            <select id="archivoSelect"
+                style="width: 100%; max-width: 400px; padding: 10px; font-size: 1rem; background: #33004d; color: #eaeaea; border: 2px solid #ff00ea; border-radius: 10px; cursor: pointer;">
+                <option value="palabras-musica.csv">palabras-musica.csv</option>
+                <option value="yo-nunca.csv">yo-nunca.csv</option>
+            </select>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <label for="textoInput" style="display: block; margin-bottom: 10px; color: #a259ff;">Texto a añadir:</label>
+            <input type="text" id="textoInput" placeholder="Escribe el texto aquí..."
+                style="width: 100%; max-width: 400px; padding: 10px; font-size: 1rem; background: #33004d; color: #eaeaea; border: 2px solid #ff00ea; border-radius: 10px;">
+        </div>
+
+        <div style="margin: 20px 0; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <button onclick="aniadirLinea()">Añadir</button>
+            <button onclick="location.href='index.html'">Volver</button>
+        </div>
+
+        <div id="mensaje" style="margin-top: 20px; padding: 10px; border-radius: 10px; display: none;"></div>
+    </div>
+
+    <script>
+        async function aniadirLinea() {
+            const archivo = document.getElementById('archivoSelect').value;
+            const texto = document.getElementById('textoInput').value.trim();
+            const mensajeDiv = document.getElementById('mensaje');
+
+            if (!texto) {
+                mostrarMensaje('Por favor, escribe algo antes de añadir.', 'error');
+                return;
+            }
+
+            try {
+                // Leer el archivo CSV actual
+                const resp = await fetch(`./CSV/${archivo}`);
+                const contenidoActual = await resp.text();
+
+                // Añadir la nueva línea
+                const nuevoContenido = contenidoActual.trim() + '\n' + texto;
+
+                // Descargar el archivo actualizado
+                descargarArchivo(archivo, nuevoContenido);
+
+                mostrarMensaje(`✓ Línea añadida a ${archivo}. El archivo se ha descargado. Reemplaza el archivo original en la carpeta CSV.`, 'exito');
+                document.getElementById('textoInput').value = '';
+
+            } catch (err) {
+                mostrarMensaje('Error al procesar el archivo: ' + err.message, 'error');
+            }
+        }
+
+        function descargarArchivo(nombreArchivo, contenido) {
+            const blob = new Blob([contenido], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+
+            link.setAttribute('href', url);
+            link.setAttribute('download', nombreArchivo);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function mostrarMensaje(texto, tipo) {
+            const mensajeDiv = document.getElementById('mensaje');
+            mensajeDiv.textContent = texto;
+            mensajeDiv.style.display = 'block';
+
+            if (tipo === 'exito') {
+                mensajeDiv.style.background = '#1a4d1a';
+                mensajeDiv.style.border = '2px solid #00ff00';
+                mensajeDiv.style.color = '#00ff00';
+            } else {
+                mensajeDiv.style.background = '#4d1a1a';
+                mensajeDiv.style.border = '2px solid #ff0000';
+                mensajeDiv.style.color = '#ff0000';
+            }
+
+            setTimeout(() => {
+                mensajeDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+
+</body>
+
+</html>
