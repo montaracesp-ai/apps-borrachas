@@ -79,8 +79,8 @@ button.back:hover {
 
 /* Banner encima de la palabra */
 .banner {
-    max-width: 300px;
-    width: 80%;
+    max-width: 600px;
+    width: 95%;
     height: auto;
     position: relative;
     z-index: 1;
