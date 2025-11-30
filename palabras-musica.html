@@ -8,22 +8,31 @@
 <body>
 
   <div class="card">
-    <h1>Karaoke Kan</h1>
-
-    <div id="palabra" class="palabra">Cargando…</div>
-
-    <button onclick="nuevaPalabra()">Cambiar palabra</button>
-    <button class="back" onclick="location.href='index.html'">Volver</button>
+      <h1 id="palabra">guitarra</h1>
   </div>
 
-<script>
-  async function nuevaPalabra() {
-    const res = await fetch('/api/random');
-    const data = await res.json();
-    document.getElementById('palabra').textContent = data.palabra;
-  }
-  nuevaPalabra();
-</script>
+  <button onclick="cambiarPalabra()">Cambiar palabra</button>
+
+  <script>
+      /* ======= LISTA DE PALABRAS ======= */
+      let palabras = ["guitarra", "melodía", "ritmo", "batería", "voz", "acorde", "compás", "nota"];
+      let indice = 0;
+
+      function cambiarPalabra() {
+          const card = document.querySelector(".card");
+
+          // Inicia vibración
+          card.classList.add("vibrando");
+
+          // Espera 2 segundos y luego cambia la palabra
+          setTimeout(() => {
+              card.classList.remove("vibrando");
+
+              indice = (indice + 1) % palabras.length;
+              document.getElementById("palabra").textContent = palabras[indice];
+          }, 2000);
+      }
+  </script>
 
 </body>
 </html>
