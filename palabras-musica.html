@@ -12,11 +12,14 @@
 
 <body class="palabras-musica">
 
+    <img src="banner.png" alt="Banner" class="banner">
+
     <div class="card">
         <h1 id="palabra">Cargando...</h1>
     </div>
 
     <button id="btnCambiar">Cambiar palabra</button>
+    <button id="btnVolver" class="btn-volver">Volver atrás</button>
 
     <script>
         let palabras = [];
@@ -63,7 +66,12 @@
             }, 2000);
         }
 
+        function volverAtras() {
+            window.location.href = 'index.html';
+        }
+
         document.getElementById("btnCambiar").addEventListener("click", cambiarPalabra);
+        document.getElementById("btnVolver").addEventListener("click", volverAtras);
 
         // Iniciar carga del CSV
         cargarCSV();

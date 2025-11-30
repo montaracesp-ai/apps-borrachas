@@ -70,6 +70,22 @@ button.back:hover {
     color: #ff2dac;
 }
 
+/* Botón volver más pequeño */
+.btn-volver {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Banner encima de la palabra */
+.banner {
+    max-width: 300px;
+    width: 80%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
+
 /* Animación vibración de la tarjeta */
 @keyframes vibrar-intenso {
     0% {
