@@ -21,9 +21,14 @@
     <button id="btnCambiar">Cambiar palabra</button>
     <button id="btnVolver" class="btn-volver">Volver atrás</button>
 
+    <button id="btnMute" class="btn-mute" title="Mutear/Desmutear">🔊</button>
+
     <script>
         let palabras = [];
         let indice = -1;
+        let muted = false;
+        const sonido = new Audio('./SONIDOS/siguiente-palabra.mp3');
+        const riser = new Audio('./SONIDOS/riser.mp3');
 
         // Cargar el CSV del servidor
         async function cargarCSV() {
@@ -45,9 +50,18 @@
         function mostrarPalabraInicial() {
             indice = Math.floor(Math.random() * palabras.length);
             document.getElementById("palabra").textContent = palabras[indice];
+            if (!muted) {
+                sonido.play().catch(err => console.log('Error reproduciendo sonido:', err));
+            }
         }
 
         function cambiarPalabra() {
+            // Reproducir sonido riser al hacer clic
+            if (!muted) {
+                riser.currentTime = 0;
+                riser.play().catch(err => console.log('Error reproduciendo riser:', err));
+            }
+
             const card = document.querySelector(".card");
             card.classList.add("vibrando");
 
@@ -63,7 +77,17 @@
                 indice = nuevoIndice;
 
                 document.getElementById("palabra").textContent = palabras[indice];
+                if (!muted) {
+                    sonido.currentTime = 0;
+                    sonido.play().catch(err => console.log('Error reproduciendo sonido:', err));
+                }
             }, 2000);
+        }
+
+        function toggleMute() {
+            muted = !muted;
+            const btnMute = document.getElementById("btnMute");
+            btnMute.textContent = muted ? "🔇" : "🔊";
         }
 
         function volverAtras() {
@@ -72,6 +96,7 @@
 
         document.getElementById("btnCambiar").addEventListener("click", cambiarPalabra);
         document.getElementById("btnVolver").addEventListener("click", volverAtras);
+        document.getElementById("btnMute").addEventListener("click", toggleMute);
 
         // Iniciar carga del CSV
         cargarCSV();
