@@ -23,7 +23,7 @@
         // Cargar el CSV del servidor
         async function cargarCSV() {
             try {
-                const resp = await fetch("palabras-musica.csv");
+                const resp = await fetch("./CSV/palabras-musica.csv");
                 const texto = await resp.text();
 
                 palabras = texto
