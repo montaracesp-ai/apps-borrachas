@@ -2,7 +2,7 @@
    ESTILO GLOBAL TOKYO NIGHT
    ============================ */
 
-   body {
+body {
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,7 +11,8 @@
     align-items: center;
     gap: 40px;
     height: 100vh;
-    background: #14001f; /* Fondo morado oscuro */
+    background: #14001f;
+    /* Fondo morado oscuro */
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
     color: #eaeaea;
 }
@@ -23,8 +24,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #1d002b; /* Fondo tarjeta */
-    border: 3px solid #b400ff; /* borde neón violeta */
+    background: #1d002b;
+    /* Fondo tarjeta */
+    border: 3px solid #b400ff;
+    /* borde neón violeta */
     box-shadow: 0 0 20px #b400ff;
     border-radius: 15px;
     transition: transform 0.2s;
@@ -69,12 +72,29 @@ button.back:hover {
 
 /* Animación vibración de la tarjeta */
 @keyframes vibrar-intenso {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    20% { transform: translate(-2px, 2px) rotate(-1deg); }
-    40% { transform: translate(2px, -2px) rotate(1deg); }
-    60% { transform: translate(-4px, 4px) rotate(-2deg); }
-    80% { transform: translate(4px, -4px) rotate(2deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    20% {
+        transform: translate(-2px, 2px) rotate(-1deg);
+    }
+
+    40% {
+        transform: translate(2px, -2px) rotate(1deg);
+    }
+
+    60% {
+        transform: translate(-4px, 4px) rotate(-2deg);
+    }
+
+    80% {
+        transform: translate(4px, -4px) rotate(2deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
 }
 
 .vibrando {
@@ -91,7 +111,8 @@ button.back:hover {
 }
 
 /* Títulos generales */
-h1, h2 {
+h1,
+h2 {
     color: #a259ff;
     text-shadow: 0 0 10px #a259ff;
     margin: 0;
@@ -109,4 +130,29 @@ h1, h2 {
         font-size: 1rem;
         padding: 10px;
     }
+}
+
+/* Solo para palabras-musica.html */
+body.palabras-musica {
+    position: relative;
+    overflow: hidden;
+}
+
+body.palabras-musica::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('fondo-karaoke-kan.jpg') center/cover no-repeat;
+    opacity: 0.35;
+    /* Ajusta entre 0.3 y 0.4 según quieras */
+    z-index: 0;
+}
+
+/* Asegurar que el contenido quede por encima del fondo */
+body.palabras-musica>* {
+    position: relative;
+    z-index: 1;
 }
