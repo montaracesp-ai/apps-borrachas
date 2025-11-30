@@ -1,38 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Karaoke Kan</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabras Música</title>
+
+    <!-- Archivo de estilos externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="card">
-      <h1 id="palabra">guitarra</h1>
-  </div>
+    <div class="card">
+        <h1 id="palabra">Cargando...</h1>
+    </div>
 
-  <button onclick="cambiarPalabra()">Cambiar palabra</button>
+    <button id="btnCambiar">Cambiar palabra</button>
 
-  <script>
-      /* ======= LISTA DE PALABRAS ======= */
-      let palabras = ["guitarra", "melodía", "ritmo", "batería", "voz", "acorde", "compás", "nota"];
-      let indice = 0;
+    <script>
+        let palabras = [];
+        let indice = -1;
 
-      function cambiarPalabra() {
-          const card = document.querySelector(".card");
+        // Cargar el CSV del servidor
+        async function cargarCSV() {
+            try {
+                const resp = await fetch("palabras-musica.csv");
+                const texto = await resp.text();
 
-          // Inicia vibración
-          card.classList.add("vibrando");
+                palabras = texto
+                    .split("\n")
+                    .map(p => p.trim())
+                    .filter(p => p.length > 0);
 
-          // Espera 2 segundos y luego cambia la palabra
-          setTimeout(() => {
-              card.classList.remove("vibrando");
+                mostrarPalabraInicial();
+            } catch (err) {
+                document.getElementById("palabra").textContent = "Error cargando CSV";
+            }
+        }
 
-              indice = (indice + 1) % palabras.length;
-              document.getElementById("palabra").textContent = palabras[indice];
-          }, 2000);
-      }
-  </script>
+        function mostrarPalabraInicial() {
+            indice = Math.floor(Math.random() * palabras.length);
+            document.getElementById("palabra").textContent = palabras[indice];
+        }
+
+        function cambiarPalabra() {
+            const card = document.querySelector(".card");
+            card.classList.add("vibrando");
+
+            // Cambiar palabra después de 2 segundos
+            setTimeout(() => {
+                card.classList.remove("vibrando");
+
+                let nuevoIndice;
+                do {
+                    nuevoIndice = Math.floor(Math.random() * palabras.length);
+                } while (nuevoIndice === indice);
+
+                indice = nuevoIndice;
+
+                document.getElementById("palabra").textContent = palabras[indice];
+            }, 2000);
+        }
+
+        document.getElementById("btnCambiar").addEventListener("click", cambiarPalabra);
+
+        // Iniciar carga del CSV
+        cargarCSV();
+    </script>
 
 </body>
 </html>

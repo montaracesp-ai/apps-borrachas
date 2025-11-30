@@ -1,83 +1,73 @@
-/* ===============================
-   ESTILO GLOBAL TOKYO NIGHT / NEON
-   =============================== */
+/* ============================
+   ESTILO GLOBAL TOKYO NIGHT
+   ============================ */
 
    body {
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    height: 100vh;
+    background: #14001f; /* Fondo morado oscuro */
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    background: #0a0f1f;
     color: #eaeaea;
+}
+
+/* Tarjeta de la palabra */
+.card {
+    width: 300px;
+    height: 180px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-  }
-  
-  /* Contenedor principal */
-  .container,
-  .card {
-    background: #171d2e;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 0 15px #0008;
-    border: 2px solid #a259ff;
-  }
-  
-  /* Títulos */
-  h1, h2 {
-    color: #a259ff;
-    text-shadow: 0 0 10px #a259ff;
-  }
-  
-  /* Botones estilo cyberpunk */
-  button {
-    background: transparent;
-    color: #eaeaea;
-    border: 2px solid #ff2dac;
-    padding: 14px 24px;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    margin: 10px 0;
-    transition: 0.25s;
-    box-shadow: 0 0 8px #ff2dac55;
-  }
-  
-  button:hover {
-    border-color: #00d4ff;
-    box-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff88;
-    color: #00d4ff;
-    transform: translateY(-2px);
-  }
-  
-  /* Palabra destacada */
-  .palabra {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: 30px 0;
-    color: #ff2dac;
-    text-shadow: 0 0 10px #ff2dac;
-  }
-  
-  /* Botón volver */
-  .back {
-    margin-top: 20px;
-    border-color: #a259ff;
-    box-shadow: 0 0 10px #a259ff55;
-  }
-  .back:hover {
-    border-color: #ff2dac;
-    box-shadow: 0 0 10px #ff2dac, 0 0 20px #ff2dac88;
-    color: #ff2dac;
-  }
-  
-  /* Para centrar páginas sin tarjetas */
-  .full-center {
-    text-align: center;
-  }
+    background: #1d002b; /* Fondo tarjeta */
+    border: 3px solid #b400ff; /* borde neón violeta */
+    box-shadow: 0 0 20px #b400ff;
+    border-radius: 15px;
+    transition: transform 0.2s;
+}
 
-/* Animación de vibración de menos a más */
+.card h1 {
+    font-size: 2.2rem;
+    text-shadow: 0 0 8px #ff00ea;
+}
+
+/* Botones */
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #33004d;
+    color: #eaeaea;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: 2px solid #ff00ea;
+    box-shadow: 0 0 15px #ff00ea;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: #520075;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #ff00ea;
+}
+
+/* Botón de volver estilo distinto */
+button.back {
+    border-color: #a259ff;
+    box-shadow: 0 0 15px #a259ff;
+}
+
+button.back:hover {
+    border-color: #ff2dac;
+    box-shadow: 0 0 25px #ff2dac;
+    color: #ff2dac;
+}
+
+/* Animación vibración de la tarjeta */
 @keyframes vibrar-intenso {
     0% { transform: translate(0, 0) rotate(0deg); }
     20% { transform: translate(-2px, 2px) rotate(-1deg); }
@@ -85,9 +75,38 @@
     60% { transform: translate(-4px, 4px) rotate(-2deg); }
     80% { transform: translate(4px, -4px) rotate(2deg); }
     100% { transform: translate(0, 0) rotate(0deg); }
-  }
-  
-  .card.vibrando {
+}
+
+.vibrando {
     animation: vibrar-intenso 0.1s linear infinite;
-  }
-  
+}
+
+/* Alineación vertical para index.html con botones */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Títulos generales */
+h1, h2 {
+    color: #a259ff;
+    text-shadow: 0 0 10px #a259ff;
+    margin: 0;
+}
+
+/* Responsivo */
+@media (max-width: 400px) {
+    .card {
+        width: 90%;
+        height: 150px;
+    }
+
+    button {
+        width: 80%;
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
